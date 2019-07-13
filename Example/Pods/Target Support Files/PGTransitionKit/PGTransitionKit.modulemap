@@ -1,0 +1,6 @@
+framework module PGTransitionKit {
+  umbrella header "PGTransitionKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

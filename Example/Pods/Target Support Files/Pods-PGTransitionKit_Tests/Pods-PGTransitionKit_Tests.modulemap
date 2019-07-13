@@ -1,0 +1,6 @@
+framework module Pods_PGTransitionKit_Tests {
+  umbrella header "Pods-PGTransitionKit_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

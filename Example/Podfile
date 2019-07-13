@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'PGTransitionKit_Example' do
+  pod 'PGTransitionKit', :path => '../'
+
+  target 'PGTransitionKit_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase' , '~> 2.1.4'
+  end
+end
