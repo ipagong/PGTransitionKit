@@ -69,13 +69,13 @@ open class Interactor : NSObject {
 extension UIGestureRecognizer.State {
     internal var transitionDebugDescription: String {
         switch self {
-        case .began:     return "began"
-        case .cancelled: return "cancelled"
-        case .changed:   return "changed"
-        case .ended:     return "ended"
-        case .failed:    return "failed"
-        case .possible:  return "possible"
-        @unknown default
+        case .began:      return "began"
+        case .cancelled:  return "cancelled"
+        case .changed:    return "changed"
+        case .ended:      return "ended"
+        case .failed:     return "failed"
+        case .possible:   return "possible"
+        @unknown default: return "unknwon"
         }
     }
 }
