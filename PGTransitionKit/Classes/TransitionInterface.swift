@@ -12,13 +12,13 @@ public typealias AnimatorCompleted = (Bool) -> ()
 public typealias AnimatorChecked   = (Animator) -> (Bool)
 
 @objc
-public enum PGInteractorEdge : Int {
+public enum Edge : Int {
     case left
     case right
 }
 
 @objc
-public enum PGInteractorDirection : Int {
+public enum Direction : Int {
     case up
     case left
     case right
@@ -26,13 +26,13 @@ public enum PGInteractorDirection : Int {
 }
 
 @objc
-public enum PGInteractorSourceType : Int {
+public enum SourceType : Int {
     case present
     case dismiss
 }
 
 @objc
-public protocol PGAnimatorInteractorInput : NSObjectProtocol {
+public protocol InteractorInput : NSObjectProtocol {
     var target:UIViewController?     { get }
     var presenting:UIViewController? { get }
     
@@ -50,7 +50,7 @@ public protocol PGAnimatorInteractorInput : NSObjectProtocol {
 }
 
 @objc
-public enum PGAnimatorStatus : Int {
+public enum Status : Int {
     case prepare
     case doing
     case done
@@ -58,7 +58,7 @@ public enum PGAnimatorStatus : Int {
 }
 
 @objc
-class PGAnimationContext : NSObject {
+public class Context : NSObject {
     var target:UIViewController
     var opposite:UIViewController
     var container:UIView
@@ -71,15 +71,15 @@ class PGAnimationContext : NSObject {
 }
 
 @objc
-protocol PGAnimatorOriginable : NSObjectProtocol {    
-    func appearWhenDismiss(status: PGAnimatorStatus, animator:Animator, context: PGAnimationContext)
-    func disppearWhenPresent(status: PGAnimatorStatus, animator:Animator, context: PGAnimationContext)
+public protocol AnimatorOriginable : NSObjectProtocol {
+    func appearWhenDismiss(status: Status, animator:Animator, context: Context)
+    func disppearWhenPresent(status: Status, animator:Animator, context: Context)
 }
 
 @objc
-protocol PGAnimatorDestinationable : NSObjectProtocol {
-    func appearWhenPresent(status: PGAnimatorStatus, animator:Animator, context: PGAnimationContext)
-    func disppearWhenDismiss(status: PGAnimatorStatus, animator:Animator, context: PGAnimationContext)
+public protocol AnimatorDestinationable : NSObjectProtocol {
+    func appearWhenPresent(status: Status, animator:Animator, context: Context)
+    func disppearWhenDismiss(status: Status, animator:Animator, context: Context)
 }
 
 extension Interactor {

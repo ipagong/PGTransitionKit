@@ -13,14 +13,14 @@ import UIKit
 open class EdgeInteractor : Interactor {
     
     @objc
-    public init(targetView: UIView, edge: PGInteractorEdge) {
+    public init(targetView: UIView, edge: Edge) {
         super.init()
         self.edge = edge
         super.targetView = targetView
         super.targetView?.addGestureRecognizer(self.gesutre)
     }
     
-    public var edge:PGInteractorEdge = .left {
+    public var edge:Edge = .left {
         didSet { self.gesutre.edges = self.gestureEdge }
     }
     

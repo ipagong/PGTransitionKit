@@ -13,15 +13,15 @@ extension Animator {
     internal func presentAnimation(from:UIViewController, to:UIViewController, container:UIView, context: UIViewControllerContextTransitioning) {
         self.animationData = [String:Any]()
         
-        let origin = self.target as? PGAnimatorOriginable
-        let destination = self.presenting as? PGAnimatorDestinationable
+        let origin = self.target as? AnimatorOriginable
+        let destination = self.presenting as? AnimatorDestinationable
         
         to.view.frame = from.view.frame
         to.view.setNeedsLayout()
         to.view.layoutIfNeeded()
         
-        let orgContext = PGAnimationContext.init(target: from, opposite: to,   container: container)
-        let dstContext = PGAnimationContext.init(target: to,   opposite: from, container: container)
+        let orgContext = Context.init(target: from, opposite: to,   container: container)
+        let dstContext = Context.init(target: to,   opposite: from, container: container)
         
         from.viewWillDisappear(true)
         
@@ -62,11 +62,11 @@ extension Animator {
     internal func dismissAnimation(from:UIViewController, to:UIViewController, container:UIView, context: UIViewControllerContextTransitioning) {
         self.animationData = [String:Any]()
         
-        let origin = self.target as? PGAnimatorOriginable
-        let destination = self.presenting as? PGAnimatorDestinationable
+        let origin = self.target as? AnimatorOriginable
+        let destination = self.presenting as? AnimatorDestinationable
         
-        let orgContext = PGAnimationContext.init(target: to,   opposite: from, container: container)
-        let dstContext = PGAnimationContext.init(target: from, opposite: to,   container: container)
+        let orgContext = Context.init(target: to,   opposite: from, container: container)
+        let dstContext = Context.init(target: from, opposite: to,   container: container)
         
         to.viewWillAppear(true)
         

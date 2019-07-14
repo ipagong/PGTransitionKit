@@ -11,10 +11,10 @@ import UIKit
 @objc
 open class Interactor : NSObject {
     @objc
-    public weak var animator:PGAnimatorInteractorInput?
+    public weak var animator:InteractorInput?
     
     @objc
-    public var sourceType:PGInteractorSourceType = .present
+    public var sourceType:SourceType = .present
 
     @objc
     public var beganPoint:CGPoint = .zero

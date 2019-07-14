@@ -12,7 +12,7 @@ import UIKit
 open class DirectionInteractor : Interactor {
     
     @objc
-    public init(targetView: UIView, direction: PGInteractorDirection) {
+    public init(targetView: UIView, direction: Direction) {
         super.init()
         self.direction = direction
         super.targetView = targetView
@@ -20,7 +20,7 @@ open class DirectionInteractor : Interactor {
     }
     
     @objc
-    public init(targetView: UIView, direction: PGInteractorDirection, distance:CGFloat) {
+    public init(targetView: UIView, direction: Direction, distance:CGFloat) {
         super.init()
         self.direction = direction
         self.distance = distance
@@ -28,7 +28,7 @@ open class DirectionInteractor : Interactor {
         super.targetView?.addGestureRecognizer(self.gesutre)
     }
     
-    public var direction:PGInteractorDirection = .left
+    public var direction:Direction = .left
     public var distance:CGFloat?
 
     private var maxDistance:CGFloat {

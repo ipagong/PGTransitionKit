@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Animator : PGAnimatorInteractorInput {
+extension Animator : InteractorInput {
     @objc
     public var willPresentController:UIViewController? {
         guard let vc = self.presenting else { return nil }

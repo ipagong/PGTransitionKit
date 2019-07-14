@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PGTransitionKit'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'Percetage Present Transition Animation Module.'
   s.description      = 'Percetage Present Transition Animation Module with Animator/Interactor.'
   s.homepage         = 'https://github.com/ipagong/PGTransitionKit'
