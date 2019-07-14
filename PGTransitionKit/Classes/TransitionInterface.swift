@@ -59,9 +59,9 @@ public enum Status : Int {
 
 @objc
 public class Context : NSObject {
-    var target:UIViewController
-    var opposite:UIViewController
-    var container:UIView
+    public var target:UIViewController
+    public var opposite:UIViewController
+    public var container:UIView
     
     init(target: UIViewController, opposite:UIViewController, container:UIView) {
         self.target = target
