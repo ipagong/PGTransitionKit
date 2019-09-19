@@ -36,12 +36,20 @@ public class Animator: UIPercentDrivenInteractiveTransition {
             presentInteractor?.animator = self
             presentInteractor?.sourceType = .present
         }
+        
+        willSet {
+            presentInteractor?.animator = nil
+        }
     }
     
     public var dismissInteractor:Interactor? {
         didSet {
             dismissInteractor?.animator = self
             dismissInteractor?.sourceType = .dismiss
+        }
+        
+        willSet {
+            dismissInteractor?.animator = nil
         }
     }
     

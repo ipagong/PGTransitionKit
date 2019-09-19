@@ -10,112 +10,88 @@ import UIKit
 
 @objc
 open class ScrollDownInteractor : Interactor {
-    
     @objc
     public init(targetView: UIScrollView) {
         super.init()
         super.targetView = targetView
+        targetView.alwaysBounceVertical = false
+        super.targetView?.addGestureRecognizer(self.gesutre)
+    }
+    
+    public var distance:CGFloat?
+    private var maxDistance:CGFloat {
+        if let value = self.distance { return value }
+        
+        return (self.targetScrollView?.bounds.height ?? 200) / 2
     }
     
     override weak var targetView:UIView? {
         didSet {
-            guard let scrollBase = targetView as? UIScrollView else { return }
-            scrollBase.delegate = self
-            scrollBase.bounces = true
-            scrollBase.alwaysBounceVertical = true
+            targetView?.addGestureRecognizer(self.gesutre)
         }
         
         willSet {
             guard let view = targetView, view != newValue else { return }
-            guard let scrollBase = targetView as? UIScrollView else { return }
-            scrollBase.delegate = nil
+            guard view.gestureRecognizers?.contains(gesutre) == true else { return }
+            view.removeGestureRecognizer(gesutre)
+        }
+    }
+    
+    lazy private var gesutre:UIPanGestureRecognizer = {
+        let gesutre = UIPanGestureRecognizer(target: self, action: #selector(onGesture(_:)))
+        gesutre.delegate = self
+        return gesutre
+    }()
+    
+    @objc
+    func onGesture(_ gesture:UIPanGestureRecognizer) {
+        guard let target = willTargetViewController else { return }
+        guard let window = willTargetWindow else { return }
+        guard let scrollView = self.targetScrollView else { return }
+        
+        let location = gesture.location(in: window)
+        let velocity = gesture.velocity(in: window)
+        
+        var percentage:CGFloat {
+            return ((location.y - beganPoint.y) / maxDistance)
+        }
+        
+        var finished:Bool {
+            return (velocity.y > 0.0)
+        }
+        
+        switch gesture.state {
+        case .began:
+            Interactor.Logger.debug(gesture.state.transitionDebugDescription)
+            
+        case .changed:
+            guard scrollView.contentOffset.y <= scrollView.topVerticalOffset else {
+                if hasInteraction == true { self.ended(false) }
+                hasInteraction = false
+                return
+            }
+            
+            if hasInteraction == false { self.began(location) }
+            
+            scrollView.holdTopIfOver()
+            
+            self.changed(percentage)
+            
+        case .ended:
+            guard hasInteraction == true else { return }
+            self.ended(finished)
+            
+        default:
+            Interactor.Logger.debug(gesture.state.transitionDebugDescription)
         }
     }
     
     fileprivate var targetScrollView:UIScrollView? { return self.targetView as? UIScrollView }
-
-    public weak var scrollViewDelegate:UIScrollViewDelegate?
 }
 
-extension ScrollDownInteractor : UIScrollViewDelegate {
-    
-    public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        self.scrollViewDelegate?.scrollViewWillEndDragging?(scrollView, withVelocity: velocity, targetContentOffset: targetContentOffset)
-        
-        guard scrollView.contentOffset.y <= scrollView.topVerticalOffset else { return }
-        
-        targetContentOffset.pointee = scrollView.contentOffset
-        
-        guard hasInteraction == true else { return }
-        
-        let finished = velocity.y < 0.0
-        
-        self.ended(finished)
-    }
-    
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollView.holdBottomIfOver()
-        self.scrollViewDelegate?.scrollViewDidScroll?(scrollView)
-        
-        guard let scrollBase = self.targetScrollView else { return }
-        guard scrollBase == scrollView else { return }
-        
-        guard scrollView.contentOffset.y < scrollView.topVerticalOffset else {
-            if hasInteraction == true { self.ended(false) }
-            hasInteraction = false
-            return
-        }
-        
-        guard scrollView.isDragging == true else { return }
-        guard scrollView.isDecelerating == false else { return }
-        
-        let percentage = ((-1 * scrollView.contentOffset.y) / (scrollView.bounds.height/2))
-        
-        self.changed(percentage)
-    }
-    
-    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidZoom?(scrollView)
-    }
-    
-    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewWillBeginDragging?(scrollView)
-    }
-    
-    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        self.scrollViewDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
-    }
-    
-    public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewWillBeginDecelerating?(scrollView)
-    }
-    
-    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidEndDecelerating?(scrollView)
-    }
-    
-    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidEndScrollingAnimation?(scrollView)
-    }
-    
-    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.scrollViewDelegate?.viewForZooming?(in: scrollView)
-    }
-    
-    public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-        self.scrollViewDelegate?.scrollViewWillBeginZooming?(scrollView, with: view)
-    }
-    
-    public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        self.scrollViewDelegate?.scrollViewDidEndZooming?(scrollView, with: view, atScale: scale)
-    }
-    
-    public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        return self.scrollViewDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? true
-    }
-    
-    public func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        self.scrollViewDelegate?.scrollViewDidScrollToTop?(scrollView)
+extension ScrollDownInteractor : UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
 
