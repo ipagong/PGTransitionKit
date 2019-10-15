@@ -68,12 +68,12 @@ open class ScrollDownInteractor : Interactor {
             Interactor.Logger.debug(gesture.state.transitionDebugDescription)
             
         case .changed:
-            guard scrollView.contentOffset.y <= scrollView.topVerticalOffset else {
+            if scrollView.contentOffset.y > scrollView.topVerticalOffset {
                 if hasInteraction == true { self.ended(false) }
                 hasInteraction = false
                 return
             }
-            
+
             if hasInteraction == false { self.began(location) }
             
             scrollView.holdTopIfOver()
