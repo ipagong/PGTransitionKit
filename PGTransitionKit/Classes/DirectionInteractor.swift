@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc
+@objc(PGDirectionInteractor)
 open class DirectionInteractor : Interactor {
     
     @objc
@@ -28,11 +28,14 @@ open class DirectionInteractor : Interactor {
         super.targetView?.addGestureRecognizer(self.gesutre)
     }
     
+    @objc
     public var direction:Direction = .left
-    public var distance:CGFloat?
+    
+    @objc
+    public var distance:CGFloat = 0.0
 
     private var maxDistance:CGFloat {
-        if let value = self.distance { return value }
+        if self.distance > 0 { return self.distance }
         
         switch direction {
         case .up,    .down: return targetView?.bounds.height ?? 0
@@ -40,6 +43,7 @@ open class DirectionInteractor : Interactor {
         }
     }
     
+    @objc
     override weak var targetView:UIView? {
         didSet {
             targetView?.addGestureRecognizer(self.gesutre)

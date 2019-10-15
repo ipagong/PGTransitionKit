@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc
+@objc(PGInteractor)
 open class Interactor : NSObject {
     @objc
     public weak var animator:InteractorInput?

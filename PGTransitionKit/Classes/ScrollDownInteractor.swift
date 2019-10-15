@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc
+@objc(PGScrollDownInteractor)
 open class ScrollDownInteractor : Interactor {
     @objc
     public init(targetView: UIScrollView) {
@@ -18,13 +18,16 @@ open class ScrollDownInteractor : Interactor {
         super.targetView?.addGestureRecognizer(self.gesutre)
     }
     
-    public var distance:CGFloat?
+    @objc
+    public var distance:CGFloat = 0.0
+    
     private var maxDistance:CGFloat {
-        if let value = self.distance { return value }
+        if self.distance > 0 { return self.distance }
         
         return (self.targetScrollView?.bounds.height ?? 200) / 2
     }
     
+    @objc
     override weak var targetView:UIView? {
         didSet {
             targetView?.addGestureRecognizer(self.gesutre)

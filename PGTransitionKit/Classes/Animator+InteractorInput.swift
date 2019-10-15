@@ -29,6 +29,7 @@ extension Animator : InteractorInput {
         return vc
     }
     
+    @objc
     public func presentAction() {
         guard let vc = self.presenting else { return }
         guard canPresent      == true  else { return }
@@ -42,6 +43,7 @@ extension Animator : InteractorInput {
         self.target?.present(vc, animated: true) { [weak self] in self?.didActionStart = false }
     }
     
+    @objc
     public func dismissAction() {
         guard let vc = self.presenting else { return }
         guard canDismiss      == true  else { return }
@@ -54,15 +56,18 @@ extension Animator : InteractorInput {
         vc.dismiss(animated: true) { [weak self] in self?.didActionStart = false }
     }
     
+    @objc
     public func began() {
         self.hasInteraction = true
     }
     
+    @objc
     public func changed(_ percentage: CGFloat) {
         self.hasInteraction = true
         self.update(percentage)
     }
     
+    @objc
     public func ended(_ finish: Bool) {
         guard self.hasInteraction == true else { return }
         if finish == true {

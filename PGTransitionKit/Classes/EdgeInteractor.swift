@@ -8,8 +8,7 @@
 
 import UIKit
 
-
-@objc
+@objc(PGEdgeInteractor)
 open class EdgeInteractor : Interactor {
     
     @objc

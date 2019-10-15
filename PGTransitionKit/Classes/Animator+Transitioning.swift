@@ -47,6 +47,7 @@ extension Animator : UIViewControllerTransitioningDelegate, UIViewControllerAnim
 }
 
 extension Animator {
+    @objc
     open override func update(_ percentComplete: CGFloat) {
         guard percentComplete >= 0.00 else { return }
         guard percentComplete <= 1.00 else { return }

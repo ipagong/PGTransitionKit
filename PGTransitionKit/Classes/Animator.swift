@@ -8,30 +8,30 @@
 
 import UIKit
 
-@objc
+@objc(PGAnimator)
 public class Animator: UIPercentDrivenInteractiveTransition {
-    public var tag:String = ""
+    @objc public var tag:String = ""
     
-    public var presentBlock:AnimatorCompleted?
-    public var dismissBlock:AnimatorCompleted?
+    @objc public var presentBlock:AnimatorCompleted?
+    @objc public var dismissBlock:AnimatorCompleted?
     
-    public var canPresentBlock:AnimatorChecked?
-    public var canDismissBlock:AnimatorChecked?
+    @objc public var canPresentBlock:AnimatorChecked?
+    @objc public var canDismissBlock:AnimatorChecked?
     
-    public var canPresent:Bool { return self.canPresentBlock?(self) ?? true }
-    public var canDismiss:Bool { return self.canDismissBlock?(self) ?? true }
+    @objc public var canPresent:Bool { return self.canPresentBlock?(self) ?? true }
+    @objc public var canDismiss:Bool { return self.canDismissBlock?(self) ?? true }
     
-    public var enablePresent:Bool = true
-    public var enableDismiss:Bool = true
+    @objc public var enablePresent:Bool = true
+    @objc public var enableDismiss:Bool = true
     
-    public var presentDuration:TimeInterval = 0.3
-    public var dismissDuration:TimeInterval = 0.3
+    @objc public var presentDuration:TimeInterval = 0.3
+    @objc public var dismissDuration:TimeInterval = 0.3
     
-    public var defaultContainerSetup:Bool = true
+    @objc public var defaultContainerSetup:Bool = true
     
-    public var animationData = [String:Any]()
+    @objc public var animationData = [String:Any]()
     
-    public var presentInteractor:Interactor? {
+    @objc public var presentInteractor:Interactor? {
         didSet {
             presentInteractor?.animator = self
             presentInteractor?.sourceType = .present
@@ -42,7 +42,7 @@ public class Animator: UIPercentDrivenInteractiveTransition {
         }
     }
     
-    public var dismissInteractor:Interactor? {
+    @objc public var dismissInteractor:Interactor? {
         didSet {
             dismissInteractor?.animator = self
             dismissInteractor?.sourceType = .dismiss
@@ -53,7 +53,7 @@ public class Animator: UIPercentDrivenInteractiveTransition {
         }
     }
     
-    public weak var target:UIViewController? {
+    @objc public weak var target:UIViewController? {
         didSet  {
             self.target?.transitionAnimator = self
             self.target?.transitioningDelegate = self
@@ -64,7 +64,7 @@ public class Animator: UIPercentDrivenInteractiveTransition {
         }
     }
     
-    public weak var presenting:UIViewController? {
+    @objc public weak var presenting:UIViewController? {
         didSet  {
             self.presenting?.transitionAnimator = self
             self.presenting?.transitioningDelegate = self
@@ -79,7 +79,9 @@ public class Animator: UIPercentDrivenInteractiveTransition {
     
     internal var isPresented:Bool { return current != target }
     
+    @objc
     public var hasInteraction:Bool = false
+    
     var didActionStart:Bool = false
     
     @objc

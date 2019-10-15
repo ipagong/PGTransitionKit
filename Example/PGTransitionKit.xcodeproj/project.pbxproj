@@ -13,6 +13,12 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		91468D9023337B490031A301 /* EdgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91468D8F23337B490031A301 /* EdgeViewController.swift */; };
+		91468D9223337B4F0031A301 /* DirectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91468D9123337B4F0031A301 /* DirectionViewController.swift */; };
+		91468D9423337B560031A301 /* ScrollDownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91468D9323337B560031A301 /* ScrollDownViewController.swift */; };
+		91468D962333848E0031A301 /* EdgeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91468D952333848E0031A301 /* EdgeDetailViewController.swift */; };
+		91468D98233384950031A301 /* DirectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91468D97233384950031A301 /* DirectionDetailViewController.swift */; };
+		91468D9A2333849F0031A301 /* ScrollDownDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91468D992333849F0031A301 /* ScrollDownDetailViewController.swift */; };
 		BEFADED67558B9AE831BCD53 /* Pods_PGTransitionKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CADC5E062000A57144A345E /* Pods_PGTransitionKit_Tests.framework */; };
 		F8C17CE873B8263C77367C7D /* Pods_PGTransitionKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B65FCFEBD0ABF77666DF24E3 /* Pods_PGTransitionKit_Example.framework */; };
 /* End PBXBuildFile section */
@@ -41,6 +47,12 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		6CADC5E062000A57144A345E /* Pods_PGTransitionKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PGTransitionKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		91468D8F23337B490031A301 /* EdgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeViewController.swift; sourceTree = "<group>"; };
+		91468D9123337B4F0031A301 /* DirectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionViewController.swift; sourceTree = "<group>"; };
+		91468D9323337B560031A301 /* ScrollDownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollDownViewController.swift; sourceTree = "<group>"; };
+		91468D952333848E0031A301 /* EdgeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeDetailViewController.swift; sourceTree = "<group>"; };
+		91468D97233384950031A301 /* DirectionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionDetailViewController.swift; sourceTree = "<group>"; };
+		91468D992333849F0031A301 /* ScrollDownDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollDownDetailViewController.swift; sourceTree = "<group>"; };
 		91D102976621193FCB66CE6F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		9D1443496ECADE66F1E1D648 /* Pods-PGTransitionKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PGTransitionKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-PGTransitionKit_Tests/Pods-PGTransitionKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B65FCFEBD0ABF77666DF24E3 /* Pods_PGTransitionKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PGTransitionKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +127,12 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				91468D8F23337B490031A301 /* EdgeViewController.swift */,
+				91468D952333848E0031A301 /* EdgeDetailViewController.swift */,
+				91468D9123337B4F0031A301 /* DirectionViewController.swift */,
+				91468D97233384950031A301 /* DirectionDetailViewController.swift */,
+				91468D9323337B560031A301 /* ScrollDownViewController.swift */,
+				91468D992333849F0031A301 /* ScrollDownDetailViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -350,7 +368,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91468D9A2333849F0031A301 /* ScrollDownDetailViewController.swift in Sources */,
+				91468D9223337B4F0031A301 /* DirectionViewController.swift in Sources */,
+				91468D98233384950031A301 /* DirectionDetailViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				91468D962333848E0031A301 /* EdgeDetailViewController.swift in Sources */,
+				91468D9023337B490031A301 /* EdgeViewController.swift in Sources */,
+				91468D9423337B560031A301 /* ScrollDownViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

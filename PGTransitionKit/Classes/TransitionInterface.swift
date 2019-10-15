@@ -11,13 +11,13 @@ import UIKit
 public typealias AnimatorCompleted = (Bool) -> ()
 public typealias AnimatorChecked   = (Animator) -> (Bool)
 
-@objc
+@objc(PGEdge)
 public enum Edge : Int {
     case left
     case right
 }
 
-@objc
+@objc(PGDirection)
 public enum Direction : Int {
     case up
     case left
@@ -25,31 +25,31 @@ public enum Direction : Int {
     case down
 }
 
-@objc
+@objc(PGSourceType)
 public enum SourceType : Int {
     case present
     case dismiss
 }
 
-@objc
+@objc(PGInteractorInput)
 public protocol InteractorInput : NSObjectProtocol {
-    var target:UIViewController?     { get }
-    var presenting:UIViewController? { get }
+    @objc var target:UIViewController?     { get }
+    @objc var presenting:UIViewController? { get }
     
-    var willPresentController:UIViewController? { get }
-    var willDismissController:UIViewController? { get }
+    @objc var willPresentController:UIViewController? { get }
+    @objc var willDismissController:UIViewController? { get }
     
-    var hasInteraction:Bool { get set }
+    @objc var hasInteraction:Bool { get set }
     
-    func presentAction()
-    func dismissAction()
+    @objc func presentAction()
+    @objc func dismissAction()
     
-    func began()
-    func changed(_ percentage: CGFloat)
-    func ended(_ finish: Bool)
+    @objc func began()
+    @objc func changed(_ percentage: CGFloat)
+    @objc func ended(_ finish: Bool)
 }
 
-@objc
+@objc(PGStatus)
 public enum Status : Int {
     case prepare
     case doing
@@ -57,12 +57,13 @@ public enum Status : Int {
     case cancel
 }
 
-@objc
+@objc(PGContext)
 public class Context : NSObject {
-    public var target:UIViewController
-    public var opposite:UIViewController
-    public var container:UIView
+    @objc public var target:UIViewController
+    @objc public var opposite:UIViewController
+    @objc public var container:UIView
     
+    @objc
     init(target: UIViewController, opposite:UIViewController, container:UIView) {
         self.target = target
         self.opposite = opposite
@@ -70,20 +71,20 @@ public class Context : NSObject {
     }
 }
 
-@objc
+@objc(PGAnimatorOriginable)
 public protocol AnimatorOriginable : NSObjectProtocol {
-    func appearWhenDismiss(status: Status, animator:Animator, context: Context)
-    func disppearWhenPresent(status: Status, animator:Animator, context: Context)
+    @objc func appearWhenDismiss(status: Status, animator:Animator, context: Context)
+    @objc func disppearWhenPresent(status: Status, animator:Animator, context: Context)
 }
 
-@objc
+@objc(PGAnimatorDestinationable)
 public protocol AnimatorDestinationable : NSObjectProtocol {
-    func appearWhenPresent(status: Status, animator:Animator, context: Context)
-    func disppearWhenDismiss(status: Status, animator:Animator, context: Context)
+    @objc func appearWhenPresent(status: Status, animator:Animator, context: Context)
+    @objc func disppearWhenDismiss(status: Status, animator:Animator, context: Context)
 }
 
 extension Interactor {
-    public static var debug:Bool = true
+    @objc public static var debug:Bool = true
     
     public struct Logger {
         public static func debug(_ message: String?) {
@@ -94,7 +95,7 @@ extension Interactor {
 }
 
 extension Animator {
-    public static var debug:Bool = true
+    @objc public static var debug:Bool = true
     
     public struct Logger {
         public static func debug(_ message: String?) {
