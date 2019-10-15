@@ -71,7 +71,7 @@ open class ScrollDownInteractor : Interactor {
             if scrollView.contentOffset.y >= scrollView.topVerticalOffset {
                 if hasInteraction == true { self.ended(false) }
                 hasInteraction = false
-                
+                return
             }
             
             if hasInteraction == false { self.began(location) }
